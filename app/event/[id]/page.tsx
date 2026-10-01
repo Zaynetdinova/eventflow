@@ -16,17 +16,17 @@ export default function EventPage({ params }: { params: Promise<{ id: string }> 
     const [loadError, setLoadError] = useState("");
 
     useEffect(function() {
-        const supabase = getSupabaseBrowserClient();
-
-        if (!supabase) {
-            setLoadError("Supabase не настроен.");
-            setIsLoaded(true);
-            return;
-        }
-
         let isActive = true;
 
         async function loadEvent() {
+            const supabase = getSupabaseBrowserClient();
+
+            if (!supabase) {
+                setLoadError("Supabase не настроен.");
+                setIsLoaded(true);
+                return;
+            }
+
             const { data, error } = await supabase
                 .from("events")
                 .select("*")

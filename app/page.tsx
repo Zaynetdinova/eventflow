@@ -17,17 +17,17 @@ export default function Home() {
     const [maxPrice, setMaxPrice] = useState(10000);
 
     useEffect(function() {
-        const supabase = getSupabaseBrowserClient();
-
-        if (!supabase) {
-            setLoadError("Для загрузки каталога нужно подключить Supabase.");
-            setIsLoaded(true);
-            return;
-        }
-
         let isActive = true;
 
         async function loadEvents() {
+            const supabase = getSupabaseBrowserClient();
+
+            if (!supabase) {
+                setLoadError("Для загрузки каталога нужно подключить Supabase.");
+                setIsLoaded(true);
+                return;
+            }
+
             const { data, error } = await supabase
                 .from("events")
                 .select("*")

@@ -1,0 +1,87 @@
+.card {
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.category {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.price {
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+.calendarButton {
+    margin-top: 16px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #111;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.editButton,
+.deleteButton {
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.editButton {
+    border: 1px solid #ddd;
+    background: white;
+    color: #222;
+}
+
+.editButton:hover {
+    background: #f5f5f5;
+}
+
+.deleteButton {
+    border: 1px solid #e0b4b4;
+    background: #fff5f5;
+    color: #c62828;
+}
+
+.deleteButton:hover {
+    background: #ffe5e5;
+}
+.actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+@media (max-width: 768px) {
+    .actions {
+        flex-direction: column;
+    }
+
+    .editButton,
+    .deleteButton {
+        width: 100%;
+    }
+}

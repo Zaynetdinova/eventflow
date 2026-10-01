@@ -1,0 +1,102 @@
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    box-sizing: border-box;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+.title {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+.subtitle {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 24px;
+}
+.search {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+.categories {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.categoryButton {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+}
+.categoryButtonActive {
+    padding: 8px 16px;
+    border: 1px solid #111;
+    border-radius: 20px;
+    background: #111;
+    color: white;
+    cursor: pointer;
+}
+.priceRange {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 24px;
+}
+.priceFilter {
+    max-width: 500px;
+    margin-bottom: 24px;
+}
+
+.priceLabel {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.priceRange {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 24px;
+    accent-color: #111;
+}
+.priceRange::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 3px;
+    background: #ddd;
+}
+
+.priceRange::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    margin-top: -6px;
+    border-radius: 50%;
+    background: #111;
+    cursor: pointer;
+}
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    .title {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+}

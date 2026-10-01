@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EventFlow
 
-## Getting Started
+Каталог событий на Next.js. Посетители видят общий каталог и могут открыть готовое событие в своём Google Calendar. Добавлять, менять и удалять события может только администратор.
 
-First, run the development server:
+## Подключение Supabase
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Создай проект в Supabase.
+2. Открой **SQL Editor** и выполни файл `supabase/migrations/20260930000000_create_events.sql`. Он создаст таблицу, добавит демонстрационные события и настроит права: чтение открыто посетителям, изменения разрешены только администраторам.
+3. В Supabase открой **Authentication → Users** и создай пользователя администратора с email и паролем. Публичную регистрацию оставь выключенной.
+4. В **SQL Editor** назначь созданному пользователю роль администратора, подставив его email:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```sql
+   update auth.users
+   set raw_app_meta_data = coalesce(raw_app_meta_data, '{}'::jsonb) || '{"role":"admin"}'::jsonb
+   where email = 'admin@example.com';
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   Выйди из приложения и войди снова, чтобы обновить токен с новой ролью.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. Скопируй `.env.example` в `.env.local` и укажи URL проекта и publishable key из **Project Settings → API**.
+6. Запусти приложение:
 
-## Learn More
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+Страница `/` показывает каталог. Страница `/admin` содержит форму входа и управление событиями. Доступ к изменению записей также ограничен политиками RLS в самой базе.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Размещение на Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Импортируй репозиторий в Vercel и добавь туда `NEXT_PUBLIC_SUPABASE_URL` и `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` в переменные окружения. Затем запусти deployment. Секретный `service_role` key приложению не нужен и не должен попадать в браузер.
